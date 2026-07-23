@@ -247,6 +247,23 @@
     z-index:0;
   }
   #hero .hero-inner{position:relative; z-index:1;}
+  .avatar{
+    width:76px; height:76px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid var(--line);
+    margin-bottom:1rem;
+    display:block;
+  }
+  .avatar-placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--bg-panel);
+    color:var(--text-faint);
+    font-size:1.4rem;
+    font-weight:700;
+  }
   #hero h1{
     font-size:clamp(2.1rem, 5vw, 3.25rem);
     letter-spacing:-0.01em;
@@ -616,12 +633,24 @@
     }).join('');
   }
 
+  function initials(name){
+    return String(name).trim().split(/\s+/).map(function(w){ return w[0] || ''; }).join('').slice(0,2).toUpperCase();
+  }
+
+  function renderAvatar(h){
+    if(h.photo){
+      return '<img class="avatar" src="assets/'+esc(h.photo)+'" alt="'+esc(h.name)+'">';
+    }
+    return '<div class="avatar avatar-placeholder mono">'+esc(initials(h.name))+'</div>';
+  }
+
   function renderHero(){
     var h = SITE.hero;
     return '<section id="hero">'
       + '<div class="glow"></div>'
       + '<canvas id="graph" aria-hidden="true"></canvas>'
       + '<div class="hero-inner">'
+      + renderAvatar(h)
       + '<p class="eyebrow mono">'+esc(h.eyebrow)+'</p>'
       + '<h1>'+esc(h.name)+'</h1>'
       + '<p class="role">'+esc(h.role)+'</p>'
