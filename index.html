@@ -838,29 +838,18 @@
     window.addEventListener('resize', function(){ size(); makeNodes(); if(reduce) frame(); });
   }
 
-  function dataURItoBlob(dataURI){
-    var parts = dataURI.split(',');
-    var mime = parts[0].match(/:(.*?);/)[1];
-    var binary = atob(parts[1]);
-    var array = new Uint8Array(binary.length);
-    for(var i = 0; i < binary.length; i++) array[i] = binary.charCodeAt(i);
-    return new Blob([array], {type: mime});
-  }
   function openCert(btn){
-    var key = btn.getAttribute('data-cert');
-    var uri = SITE.assets[key];
-    if(!uri) return;
-    var mime = uri.substring(5, uri.indexOf(';'));
-    var ext = mime.split('/')[1] || 'jpg';
-    if(mime === 'application/pdf'){
-      var blobUrl = URL.createObjectURL(dataURItoBlob(uri));
-      window.open(blobUrl, '_blank');
+    var filename = btn.getAttribute('data-cert');
+    if(!filename) return;
+    var url = 'assets/' + filename;
+    if(filename.toLowerCase().endsWith('.pdf')){
+      window.open(url, '_blank');
       return;
     }
     var body = document.getElementById('lightbox-body');
-    body.innerHTML = '<img src="' + uri + '" alt="Certificate preview">';
-    document.getElementById('lightbox-download').href = uri;
-    document.getElementById('lightbox-download').download = key + '.' + ext;
+    body.innerHTML = '<img src="' + url + '" alt="Certificate preview">';
+    document.getElementById('lightbox-download').href = url;
+    document.getElementById('lightbox-download').download = filename;
     document.getElementById('lightbox').classList.add('open');
   }
   function closeCert(){
