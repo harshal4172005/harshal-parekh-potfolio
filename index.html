@@ -571,24 +571,7 @@
   #lightbox .lb-btn:hover{ border-color: var(--accent); color: var(--accent); }
   #lightbox .lb-download{ color: var(--accent); border-color: var(--accent-dim); }
 
-  #admin-fab{
-    position:fixed;
-    right:0.6rem;
-    bottom:0.6rem;
-    width:14px;
-    height:14px;
-    border-radius:50%;
-    border:none;
-    background:transparent;
-    cursor:pointer;
-    opacity:0;
-    transition:opacity 0.15s ease, background 0.15s ease;
-    z-index:200;
-  }
-  #admin-fab:hover, #admin-fab:focus-visible{
-    opacity:0.35;
-    background:var(--accent);
-  }
+  #admin-fab{ cursor:pointer; }
 </style>
 
 </head>
@@ -616,7 +599,6 @@
   </div>
 </div>
 
-<button id="admin-fab" aria-label="Admin" onclick="location.href='https://harshal-portfolio-admin.vercel.app/'"></button>
 
 <script>
   var SITE = null;
@@ -736,7 +718,7 @@
   }
 
   function renderFooter(){
-    return '<footer class="mono"><span>'+esc(SITE.footer)+'</span></footer>';
+    return '<footer class="mono"><span id="admin-fab" title="">'+esc(SITE.footer)+'</span></footer>';
   }
 
   function renderAll(){
@@ -747,6 +729,9 @@
       renderHero() + renderAbout() + renderEducation() + renderExperience()
       + renderProjects() + renderStack() + renderCerts() + renderResume()
       + renderConnect() + renderFooter();
+    document.getElementById('admin-fab').addEventListener('click', function(){
+      location.href = 'https://harshal-portfolio-admin.vercel.app/';
+    });
   }
 
   function initInteractions(){
