@@ -577,11 +577,17 @@
     bottom:0.6rem;
     width:14px;
     height:14px;
+    border-radius:50%;
     border:none;
     background:transparent;
     cursor:pointer;
     opacity:0;
+    transition:opacity 0.15s ease, background 0.15s ease;
     z-index:200;
+  }
+  #admin-fab:hover, #admin-fab:focus-visible{
+    opacity:0.35;
+    background:var(--accent);
   }
 </style>
 
