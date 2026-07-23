@@ -62,7 +62,8 @@
   }
 
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
+  body{overflow-x:hidden;}
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
@@ -250,7 +251,7 @@
   .avatar{
     width:96px; height:96px;
     border-radius:50%;
-    object-fit:contain;
+    object-fit:cover;
     background:var(--bg-panel);
     border:1px solid var(--line);
     margin-bottom:1rem;
